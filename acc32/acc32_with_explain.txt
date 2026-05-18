@@ -1,0 +1,53 @@
+.data        
+    n:          .word 0  ; исходное число
+    i:          .word 0  ; инкременнтируемое значение/делитель
+    const_one:  .word 1  ; константа 1
+
+.text         
+.org 0x0100    
+_start:
+    load_addr 0x80  ; читаем введенное значение в memory_mapped_io
+    store_addr n  ; сохраняем в label n
+
+    load_addr n  ; загружаем n
+    bltz return_minus_one  ; если n<0 кидаем -1
+    beqz return_minus_one  ; если n=0 кидаем -1
+
+    load_addr n  ; загружаем n
+    sub const_one  ; вычитаем 1         
+    beqz return_zero  ; если n=1 кидаем 0
+
+    load_imm 2  ; загружаем число 2 в аккамулятор
+    store_addr i  ; сохраняем в label i 
+
+loop_start:
+    load_addr i  ; загружаем i
+    mul i  ; i => i^2
+    bvs return_one  ; если переполнение кидаем 1, тк делитель не найден
+    sub n  ; вычитаем n
+    bgtz return_one  ; если i в квдарате больше n кидаем 1, тк делитель не найден
+
+    load_addr n  ; загружаем n
+    rem i  ; делим на i
+    beqz return_zero  ; если аккум 0, т.е делитель найден 
+
+    load_addr i  ; загружаем i
+    add const_one  ; добавляем константу в 1
+    store_addr i  ; сохраняем в i
+    jmp loop_start  ; прыгаем назад
+
+return_minus_one:
+    load_imm -1  ; загрузка -1 в аккум
+    jmp finish  ; прыгаем в финиш
+
+return_zero:
+    load_imm 0  ; загрузка 0 в аккум
+    jmp finish  ; прыгаем в финиш
+
+return_one:
+    load_imm 1  ; заргужаем 1 в аккум
+    ; не прыгаем => не выгодно
+
+finish:
+    store_addr 0x84  ; сохранем в адресе memory_mapped_io
+    halt  ; hlt - заканчиваем

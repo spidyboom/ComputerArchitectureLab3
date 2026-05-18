@@ -1,0 +1,52 @@
+.data        
+    n:          .word 0
+    i:          .word 0
+    const_one:  .word 1
+
+.text         
+.org 0x0100    
+_start:
+    load_addr 0x80
+    store_addr n
+
+    load_addr n
+    bltz return_minus_one   
+    beqz return_minus_one   
+
+    load_addr n
+    sub const_one         
+    beqz return_zero       
+
+    load_imm 2
+    store_addr i
+
+loop_start:
+    load_addr i
+    mul i
+    bvs return_one     
+    sub n
+    bgtz return_one  
+
+    load_addr n
+    rem i
+    beqz return_zero  
+
+    load_addr i
+    add const_one
+    store_addr i
+    jmp loop_start
+
+return_minus_one:
+    load_imm -1
+    jmp finish
+
+return_zero:
+    load_imm 0
+    jmp finish
+
+return_one:
+    load_imm 1
+
+finish:
+    store_addr 0x84
+    halt

@@ -1,0 +1,37 @@
+.text
+
+_start:
+    lui  sp, 1
+    
+    lw   a0, 128(zero)
+
+    jal  ra, count_ones
+
+    sw   a0, 132(zero)
+    
+    addi a0, zero, 0
+    halt
+
+count_ones:
+    addi sp, sp, -8
+    sw   ra, 4(sp)
+
+    beqz a0, _ones_zero
+
+    andi t0, a0, 1
+    sw   t0, 0(sp)
+    
+    srli a0, a0, 1
+    jal  ra, count_ones
+    
+    lw   t0, 0(sp)
+    add  a0, a0, t0
+    j    _ones_exit
+
+_ones_zero:
+    addi a0, zero, 0
+
+_ones_exit:
+    lw   ra, 4(sp)
+    addi sp, sp, 8
+    jr   ra

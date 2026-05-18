@@ -1,0 +1,17 @@
+limit: 2000 
+memory_size: 4096 
+memory_mapped_io: 
+  0x80: [5] 
+  0x84: [] 
+reports: 
+  - name: "Execution trace" 
+    slice: all 
+    view: | 
+      {pc:hex}: {instruction} {pc:label} 
+      Regs -> a0: {A0:dec} | sp: {Sp:hex} | ra: {Ra:hex} 
+  - name: "Result verification" 
+    slice: last 
+    view: | 
+      numio[0x84]: {io:0x84:dec} 
+    assert: | 
+      numio[0x84]: [] >>> [2]
