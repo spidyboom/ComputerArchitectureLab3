@@ -1,300 +1,288 @@
-.text
-.org 512
+.data
+    .org     0x000
+addr_in_port:      .word  128
+addr_out_port:     .word  132
+
+    .text
+    .org     0x088
 
 _start:
-	movea.l	4092, A7
-	jsr	main
-	halt
+    movea.l  4092, A7 
+    jsr      main
+    halt
 
 main:
-	movea.l	2048, A0
-	movea.l	128, A1
-	movea.l	132, A5
-	movea.l	2500, A3    
+    movea.l  2048, A0      
+    movea.l  addr_in_port, A1
+    movea.l  (A1), A1      
+    movea.l  addr_out_port, A5
+    movea.l  (A5), A5      
+    movea.l  2500, A3      
 
-	movea.l	3000, A6
-	move.l	1, -(A6)
-	move.l	10, -(A6)
-	move.l	100, -(A6)
-	move.l	1000, -(A6)
-	move.l	10000, -(A6)
-	move.l	100000, -(A6)
-	move.l	1000000, -(A6)
-	move.l	10000000, -(A6)
-	move.l	100000000, -(A6)
-	move.l	1000000000, -(A6)
+    movea.l  3000, A6      
+    move.l   1, D0
+    move.l   10, D2
+    move.l   10, D3        
+init_pow_loop:
+    move.l   D0, -(A6)
+    mul.l    D2, D0
+    sub.l    1, D3
+    bne      init_pow_loop
 
-	move.l	0, D1       
+    clr.l    D1
 read_fmt:
-	cmp.l	33, D1      
-	beq	error_exit  
-	
-	move.l	0, D0
-	move.b	(A1), D0
-	cmp.l	10, D0
-	beq	fmt_done
-	move.b	D0, (A0)+
-	add.l	1, D1       
-	jmp	read_fmt
+    cmp.l    33, D1        
+    beq      error_exit  
+    
+    clr.l    D0
+    move.b   (A1), D0
+    cmp.l    10, D0        
+    beq      fmt_done
+    move.b   D0, (A0)+
+    add.l    1, D1       
+    jmp      read_fmt
 
 fmt_done:
-	move.b	0, (A0)
-	movea.l	2048, A0
+    clr.b    (A0)
+    movea.l  2048, A0      
 
 scan_loop:
-	move.l	0, D0
-	move.b	(A0)+, D0
-	cmp.l	0, D0
-	beq	program_exit
-	cmp.l	37, D0
-	beq	handle_format
-	move.b	D0, (A3)+
-	jmp	scan_loop
+    clr.l    D0
+    move.b   (A0)+, D0
+    beq      program_exit 
+    cmp.l    37, D0        
+    beq      handle_format
+    move.b   D0, (A3)+
+    jmp      scan_loop
 
 handle_format:
-	move.l	0, D6       
-	movea.l	3600, A4    
-	move.l	0, (A4)     
+    clr.l    D6       
+    movea.l  3600, A4      
+    clr.l    (A4)     
 
-	move.l	0, D0
-	move.b	(A0), D0    
-	cmp.l	45, D0      
-	bne	hf_loop
-	move.b	(A0)+, D0   
-	move.l	1, (A4)     
+    clr.l    D0
+    move.b   (A0), D0    
+    cmp.l    45, D0        
+    bne      hf_loop
+    move.b   (A0)+, D0   
+    move.l   1, (A4)     
 
 hf_loop:
-	move.l	0, D0
-	move.b	(A0)+, D0
-	cmp.l	100, D0     
-	beq	print_integer
-	
-	sub.l	48, D0
-	bmi	scan_loop
-	cmp.l	10, D0
-	bpl	scan_loop
-	
-	move.l	D6, D3
-	add.l	D3, D6
-	add.l	D3, D6
-	add.l	D3, D6
-	add.l	D3, D6
-	add.l	D3, D6
-	add.l	D3, D6
-	add.l	D3, D6
-	add.l	D3, D6
-	add.l	D3, D6
-	add.l	D0, D6
-	jmp	hf_loop
+    clr.l    D0
+    move.b   (A0)+, D0
+    cmp.l    100, D0       
+    beq      print_integer
+    
+    sub.l    48, D0        
+    bmi      scan_loop
+    cmp.l    10, D0
+    bpl      scan_loop
+    
+    move.l   10, D3
+    mul.l    D3, D6
+    add.l    D0, D6
+    jmp      hf_loop
 
 print_integer:
-	jsr	read_int
-	
-	movea.l	3500, A2
-	move.l	0, D7
-	
-	cmp.l	0, D0
-	bpl	pi_buf_pos
-	move.l	0, D3
-	sub.l	D0, D3
-	move.l	D3, D0
-	move.b	45, (A2)+
-	add.l	1, D7
+    jsr      read_int
+    
+    movea.l  3500, A2      
+    clr.l    D7
+    
+    cmp.l    0, D0
+    bpl      pi_buf_pos
+    clr.l    D3
+    sub.l    D0, D3
+    move.l   D3, D0
+    move.b   45, (A2)+     
+    add.l    1, D7
 
-	cmp.l	0, D0
-	bpl	pi_buf_pos
-	move.b	50, (A2)+    
-	add.l	1, D7
-	move.l	1, D5        
-	sub.l	2000000000, D0 
-	movea.l	2964, A6     
-	move.l	9, D4        
-	jmp	pi_buf_loop
+    cmp.l    0, D0
+    bpl      pi_buf_pos
+    move.b   50, (A2)+     
+    add.l    1, D7
+    move.l   1, D5        
+    sub.l    2000000000, D0 
+    movea.l  2964, A6      
+    move.l   9, D4         
+    jmp      pi_buf_loop
 
 pi_buf_pos:
-	movea.l	2960, A6     
-	move.l	10, D4       
-	move.l	0, D5        
+    movea.l  2960, A6      
+    move.l   10, D4        
+    clr.l    D5        
 
 pi_buf_loop:
-	move.l	(A6)+, D1
-	move.l	48, D3
+    move.l   (A6)+, D1
+    move.l   48, D3        
 
 pi_buf_sub:
-	cmp.l	D1, D0
-	bmi	pi_buf_digit_done
-	sub.l	D1, D0
-	add.l	1, D3
-	jmp	pi_buf_sub
+    cmp.l    D1, D0
+    bmi      pi_buf_digit_done
+    sub.l    D1, D0
+    add.l    1, D3
+    jmp      pi_buf_sub
 
 pi_buf_digit_done:
-	cmp.l	48, D3
-	bne	pi_buf_write
-	cmp.l	0, D5
-	bne	pi_buf_write
-	cmp.l	1, D4
-	beq	pi_buf_write
-	jmp	pi_buf_next
+    cmp.l    48, D3        
+    bne      pi_buf_write
+    cmp.l    0, D5
+    bne      pi_buf_write
+    cmp.l    1, D4
+    beq      pi_buf_write
+    jmp      pi_buf_next
 
 pi_buf_write:
-	move.l	1, D5
-	move.b	D3, (A2)+
-	add.l	1, D7
+    move.l   1, D5
+    move.b   D3, (A2)+
+    add.l    1, D7
 
 pi_buf_next:
-	sub.l	1, D4
-	cmp.l	0, D4
-	bne	pi_buf_loop
+    sub.l    1, D4
+    bne      pi_buf_loop 
 
-	move.l	D6, D3
-	sub.l	D7, D3
-	bpl	pi_check_align
-	move.l	0, D3
+    move.l   D6, D3
+    sub.l    D7, D3
+    bpl      pi_check_align
+    clr.l    D3
 
 pi_check_align:
-	movea.l	3600, A4
-	move.l	(A4), D1
-	cmp.l	1, D1
-	beq	pi_left_align
+    movea.l  3600, A4      
+    move.l   (A4), D1
+    cmp.l    1, D1
+    beq      pi_left_align
 
 pi_right_align:
-	cmp.l	0, D3
-	beq	pi_ra_num
+    cmp.l    0, D3
+    beq      pi_ra_num
 pi_ra_pad_loop:
-	move.b	32, (A3)+    
-	sub.l	1, D3
-	cmp.l	0, D3
-	bne	pi_ra_pad_loop
+    move.b   32, (A3)+     
+    sub.l    1, D3
+    bne      pi_ra_pad_loop
 
 pi_ra_num:
-	movea.l	3500, A2
-pi_ra_num_loop:
-	cmp.l	0, D7
-	beq	pi_done
-	move.b	(A2)+, (A3)+ 
-	sub.l	1, D7
-	jmp	pi_ra_num_loop
+    movea.l  3500, A2      
+    cmp.l    0, D7
+    beq      pi_done
+pi_ra_num_loop:   
+    move.b   (A2)+, (A3)+ 
+    sub.l    1, D7
+    bne      pi_ra_num_loop
 
 pi_left_align:
-	movea.l	3500, A2
-pi_la_num_loop:
-	cmp.l	0, D7
-	beq	pi_la_pad
-	move.b	(A2)+, (A3)+ 
-	sub.l	1, D7
-	jmp	pi_la_num_loop
+    movea.l  3500, A2      
+    cmp.l    0, D7
+    beq      pi_la_pad
+pi_la_num_loop:     
+    move.b   (A2)+, (A3)+ 
+    sub.l    1, D7
+    bne      pi_la_num_loop
 
 pi_la_pad:
-	cmp.l	0, D3
-	beq	pi_done
+    cmp.l    0, D3
+    beq      pi_done
 pi_la_pad_loop:
-	move.b	32, (A3)+    
-	sub.l	1, D3
-	cmp.l	0, D3
-	bne	pi_la_pad_loop
+    move.b   32, (A3)+     
+    sub.l    1, D3
+    bne      pi_la_pad_loop 
 
 pi_done:
-	jmp	scan_loop
+    jmp      scan_loop
 
 program_exit:
-	move.b	0, (A3)
-	movea.l	2500, A2
+    move.b   0, (A3)
+    movea.l  2500, A2      
 pe_loop:
-	move.l	0, D0
-	move.b	(A2)+, D0
-	cmp.l	0, D0
-	beq	pe_done
-	move.b	D0, (A5)
-	jmp	pe_loop
+    clr.l    D0
+    move.b   (A2)+, D0
+    beq      pe_done      
+    move.b   D0, (A5)
+    jmp      pe_loop
 pe_done:
-	rts
+    rts
 
 error_exit:
-	move.l	0, D0
-	sub.l	1, D0
-	move.l	D0, (A5)
-	halt
+    clr.l    D0
+    sub.l    1, D0
+    move.l   D0, (A5)
+    halt
 
 read_int:
-	move.l	0, D0
-	move.l	0, D2       
-	move.l	0, D4       
-	
-	move.l	0, D1
-	move.b	(A1), D1
-	cmp.l	45, D1      
-	bne	ri_check_digit
-	move.l	1, D2       
-	move.l	0, D1
-	move.b	(A1), D1    
+    clr.l    D0
+    clr.l    D2       
+    clr.l    D4       
+    
+    clr.l    D1
+    move.b   (A1), D1
+    cmp.l    45, D1        
+    bne      ri_check_digit
+    move.l   1, D2       
+    clr.l    D1
+    move.b   (A1), D1    
 
 ri_check_digit:
-	cmp.l	48, D1
-	bmi	ri_invalid
-	cmp.l	58, D1
-	bpl	ri_invalid
-	
-	sub.l	48, D1
-	add.l	D1, D0
-	add.l	1, D4
+    cmp.l    48, D1        
+    bmi      ri_invalid
+    cmp.l    58, D1        
+    bpl      ri_invalid
+    
+    sub.l    48, D1
+    add.l    D1, D0
+    add.l    1, D4
 
 ri_loop:
-	move.l	0, D1
-	move.b	(A1), D1
-	cmp.l	10, D1      
-	beq	ri_done
-	
-	cmp.l	48, D1
-	bmi	error_exit
-	cmp.l	58, D1
-	bpl	error_exit
-	
-	sub.l	48, D1
-	add.l	1, D4
-	
-	cmp.l	0, D0
-	bmi	error_exit          
+    clr.l    D1
+    move.b   (A1), D1
+    cmp.l    10, D1        
+    beq      ri_done
+    
+    cmp.l    48, D1
+    bmi      error_exit
+    cmp.l    58, D1
+    bpl      error_exit
+    
+    sub.l    48, D1
+    add.l    1, D4
+    
+    cmp.l    0, D0
+    bmi      error_exit          
 
-	cmp.l	214748364, D0
-	bmi	ri_multiply         
-	beq	ri_check_exact      
-	jmp	error_exit          
+    cmp.l    214748364, D0 
+    bmi      ri_multiply         
+    beq      ri_check_exact      
+    jmp      error_exit          
 
 ri_check_exact:
-	cmp.l	1, D2
-	beq	ri_check_neg_overflow
-	cmp.l	7, D1
-	bmi	ri_multiply         
-	beq	ri_multiply
-	jmp	error_exit
+    cmp.l    1, D2
+    beq      ri_check_neg_overflow
+    cmp.l    7, D1
+    bmi      ri_multiply         
+    beq      ri_multiply
+    jmp      error_exit
 
 ri_check_neg_overflow:
-	cmp.l	8, D1
-	bmi	ri_multiply         
-	beq	ri_multiply
-	jmp	error_exit
+    cmp.l    8, D1 
+    bmi      ri_multiply         
+    beq      ri_multiply
+    jmp      error_exit
 
 ri_multiply:
-	move.l	D0, D3       
-	add.l	D3, D3       
-	add.l	D3, D3       
-	add.l	D0, D3       
-	add.l	D3, D3       
-	move.l	D3, D0       
-	add.l	D1, D0       
-	jmp	ri_loop
+    move.l   10, D3
+    mul.l    D3, D0
+    add.l    D1, D0       
+    jmp      ri_loop
 
 ri_invalid:
-	jmp	error_exit
+    jmp      error_exit
 
 ri_done:
-	cmp.l	0, D4       
-	beq	error_exit  
-	
-	cmp.l	0, D2
-	beq	ri_exit
-	move.l	0, D3
-	sub.l	D0, D3
-	move.l	D3, D0
+    cmp.l    0, D4       
+    beq      error_exit  
+    
+    cmp.l    0, D2
+    beq      ri_exit
+    clr.l    D3
+    sub.l    D0, D3
+    move.l   D3, D0
 ri_exit:
-	rts
+    rts
