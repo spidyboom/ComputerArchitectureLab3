@@ -143,14 +143,14 @@
             <mxPoint x="680" y="450" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="sT7651sGw5_s3yPxZHYy-21" edge="1" parent="1" style="endArrow=classic;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;endFill=1;" target="sT7651sGw5_s3yPxZHYy-16" value="">
+        <mxCell id="sT7651sGw5_s3yPxZHYy-21" edge="1" parent="1" source="sT7651sGw5_s3yPxZHYy-22" style="endArrow=classic;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;endFill=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" target="sT7651sGw5_s3yPxZHYy-16" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
             <mxPoint x="650" y="520" as="sourcePoint" />
             <mxPoint x="650" y="550" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="sT7651sGw5_s3yPxZHYy-22" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="operations" vertex="1">
-          <mxGeometry height="30" width="60" x="660" y="490" as="geometry" />
+          <mxGeometry height="30" width="60" x="680" y="490" as="geometry" />
         </mxCell>
         <mxCell id="sT7651sGw5_s3yPxZHYy-23" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="PS (NZVC)" vertex="1">
           <mxGeometry height="40" width="90" x="785" y="600" as="geometry" />
