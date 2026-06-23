@@ -34,8 +34,8 @@
         <mxCell id="x7Vldp6EQ6zD9LTRAYiV-10" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="signal" vertex="1">
           <mxGeometry height="30" width="60" x="340" y="440" as="geometry" />
         </mxCell>
-        <mxCell id="x7Vldp6EQ6zD9LTRAYiV-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="SXTB" vertex="1">
-          <mxGeometry height="40" width="80" x="120" y="160" as="geometry" />
+        <mxCell id="x7Vldp6EQ6zD9LTRAYiV-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Imm Gen&lt;br&gt;+&lt;br&gt;mask addi | lui" vertex="1">
+          <mxGeometry height="80" width="135" x="92.5" y="140" as="geometry" />
         </mxCell>
         <mxCell id="x7Vldp6EQ6zD9LTRAYiV-12" edge="1" parent="1" source="x7Vldp6EQ6zD9LTRAYiV-5" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;fillColor=#fff2cc;strokeColor=#d6b656;gradientColor=#ffd966;" target="x7Vldp6EQ6zD9LTRAYiV-11" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
@@ -421,6 +421,30 @@
         </mxCell>
         <mxCell id="lfMz5pKjfGoTXSf_-wTK-9" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="select rd" vertex="1">
           <mxGeometry height="30" width="60" x="1020" y="385" as="geometry" />
+        </mxCell>
+        <mxCell id="3ycpWSmgK1CltdhIfKHx-1" edge="1" parent="1" style="endArrow=classic;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;endFill=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" target="x7Vldp6EQ6zD9LTRAYiV-11" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="270" y="160" as="sourcePoint" />
+            <mxPoint x="338" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3ycpWSmgK1CltdhIfKHx-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="ImmSel" vertex="1">
+          <mxGeometry height="30" width="60" x="227.5" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="3ycpWSmgK1CltdhIfKHx-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="AR decoder" vertex="1">
+          <mxGeometry height="30" width="70" x="210" y="615" as="geometry" />
+        </mxCell>
+        <mxCell id="3ycpWSmgK1CltdhIfKHx-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="OUT intf" vertex="1">
+          <mxGeometry height="30" width="70" x="210" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="3ycpWSmgK1CltdhIfKHx-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="IN intf" vertex="1">
+          <mxGeometry height="30" width="70" x="210" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="3ycpWSmgK1CltdhIfKHx-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="IN" vertex="1">
+          <mxGeometry height="30" width="70" x="210" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="3ycpWSmgK1CltdhIfKHx-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="OUT" vertex="1">
+          <mxGeometry height="30" width="70" x="210" y="670" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
