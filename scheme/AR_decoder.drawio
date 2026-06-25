@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Страница-1" id="1kEaPdBQLC3QaaFKYFWe">
-    <mxGraphModel dx="1412" dy="744" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1177" dy="620" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -40,7 +40,7 @@
         <mxCell id="78hBdW_7bTAeY5v_4fZQ-14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="OUT" vertex="1">
           <mxGeometry height="40" width="80" x="400" y="500" as="geometry" />
         </mxCell>
-        <mxCell id="78hBdW_7bTAeY5v_4fZQ-15" edge="1" parent="1" source="78hBdW_7bTAeY5v_4fZQ-7" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="78hBdW_7bTAeY5v_4fZQ-1" value="">
+        <mxCell id="78hBdW_7bTAeY5v_4fZQ-15" edge="1" parent="1" source="78hBdW_7bTAeY5v_4fZQ-7" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" target="78hBdW_7bTAeY5v_4fZQ-1" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
             <mxPoint x="340" y="620" as="sourcePoint" />
             <mxPoint x="390" y="570" as="targetPoint" />
@@ -67,7 +67,7 @@
             <mxPoint x="490" y="590" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="78hBdW_7bTAeY5v_4fZQ-20" edge="1" parent="1" source="78hBdW_7bTAeY5v_4fZQ-7" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" target="78hBdW_7bTAeY5v_4fZQ-16" value="">
+        <mxCell id="78hBdW_7bTAeY5v_4fZQ-20" edge="1" parent="1" source="78hBdW_7bTAeY5v_4fZQ-7" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;dashed=1;" target="78hBdW_7bTAeY5v_4fZQ-16" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
             <Array as="points">
               <mxPoint x="500" y="540" />
@@ -96,7 +96,7 @@
             <mxPoint x="370" y="420" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="78hBdW_7bTAeY5v_4fZQ-26" edge="1" parent="1" source="78hBdW_7bTAeY5v_4fZQ-7" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="78hBdW_7bTAeY5v_4fZQ-11" value="">
+        <mxCell id="78hBdW_7bTAeY5v_4fZQ-26" edge="1" parent="1" source="78hBdW_7bTAeY5v_4fZQ-7" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" target="78hBdW_7bTAeY5v_4fZQ-11" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
             <Array as="points">
               <mxPoint x="500" y="420" />
